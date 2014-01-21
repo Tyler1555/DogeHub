@@ -36,7 +36,7 @@ public class DogeAPIHelper {
 		try {
 			URL dogeAPIURL = null;
 			if(usesAPIKey) {
-				dogeAPIURL = new URL("https://www.dogeapi.com/wow/?api_key=ap4vcw1nm0lo01t8b8lc181x7u0&a=" + apiArgument);
+				dogeAPIURL = new URL("https://www.dogeapi.com/wow/?api_key=" + apiKey + "&a=" + apiArgument);
 			} else {
 				dogeAPIURL = new URL("https://www.dogeapi.com/wow/?a=" + apiArgument);
 			}
@@ -73,12 +73,13 @@ public class DogeAPIHelper {
 		return connectToAPI(apiMapDoge.get("block"), false, null);
 	}
 	
+	//At the moment, these both just use my API key as there is currently no code to fetch a user's API key from a file
 	public static String getWalletBalance() {
-		return connectToAPI(apiMapDoge.get("wallet"), true, null);
+		return connectToAPI(apiMapDoge.get("wallet"), true, "ap4vcw1nm0lo01t8b8lc181x7u0");
 	}
 	
 	public static String getWalletAddress() {
-		return connectToAPI(apiMapDoge.get("address"), true, null).replace('[', ' ').replace(']', ' ');
+		return connectToAPI(apiMapDoge.get("address"), true, "ap4vcw1nm0lo01t8b8lc181x7u0").replace('[', ' ').replace(']', ' ');
 	}
 	
 }

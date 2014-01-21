@@ -16,6 +16,7 @@ public class DogeHub {
 		
 	}
 	
+	//Almost this entire method is a place holder
 	public static void main(String[] args) {
 		setup();
 		DogeAPIHelper.init();
@@ -51,9 +52,13 @@ public class DogeHub {
 				writer.newLine();
 				writer.write("useCryptsyData=true");
 				writer.newLine();
-				writer.write("#Your DogeAPI api key, you will need one if you want to use the wallet functions of this program.");
+				writer.write("#Your DogeAPI api key, you will need one if you want to use the DogeAPI wallet functions of this program.");
 				writer.newLine();
-				writer.write("apiKey=");
+				writer.write("apiKey=0");
+				writer.newLine();
+				writer.write("#The Address to your wallet, this wallet does not need to be hosted by DogeAPI.");
+				writer.newLine();
+				writer.write("walletAddress=0");
 				writer.flush();
 				writer.close();
 			} catch (IOException e) {
