@@ -56,6 +56,7 @@ private static HashMap<String, String> apiMapCryptsy = new HashMap<String, Strin
 		} catch(Exception e) {
 			System.out.println("Couldn't connect to the Cryptsy API due to: " + e.getMessage());
 			e.printStackTrace();
+			return "[E]";
 		} finally {
 			cryptsyAPIConnection.disconnect();
 		}
@@ -70,6 +71,9 @@ private static HashMap<String, String> apiMapCryptsy = new HashMap<String, Strin
 	 */
 	@SuppressWarnings("rawtypes")
 	private static String parseCryptsyData(String requestedData, String dataToParse, boolean getTradeData) {
+		if(dataToParse.equals("[E]")) {
+			return "Sorry, an error occured while trying to connect to the Cryptsy API, please try again later.";
+		}
 		JsonParserFactory factory = JsonParserFactory.getInstance();
 		JSONParser parser = factory.newJsonParser();
 		Map data = parser.parseJson(dataToParse);

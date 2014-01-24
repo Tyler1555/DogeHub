@@ -59,6 +59,7 @@ public class DogeAPIHelper {
 		} catch(Exception e) {
 			System.out.println("Couldn't connect to DogeAPI.com due to: " + e.getMessage());
 			e.printStackTrace();
+			return "Sorry, a error occured trying to connect to the DogeAPI network, please try again later.";
 		} finally {
 			dogeAPIConnection.disconnect();
 		}
