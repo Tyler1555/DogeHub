@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import me.tyler15555.dogehub.util.CryptsyAPIHelper;
 import me.tyler15555.dogehub.util.DogeAPIHelper;
+import me.tyler15555.dogehub.util.DogeChainAPIHelper;
 
 
 
@@ -21,12 +22,14 @@ public class DogeHub {
 		setup();
 		DogeAPIHelper.init();
 		CryptsyAPIHelper.init();
+		DogeChainAPIHelper.init();
 		System.out.println("Current Difficulty: " + DogeAPIHelper.getDifficulty());
 		System.out.println("Current Block: " + DogeAPIHelper.getCurrentBlock());
 		System.out.println("Wallet Balance: " + DogeAPIHelper.getWalletBalance());
 		System.out.println("Market Volume: " + CryptsyAPIHelper.getMarketVolume());
 		System.out.println("Market Price(In BTC): " + CryptsyAPIHelper.getMarketPrice());
 		System.out.println("Address: " + DogeAPIHelper.getWalletAddress());
+		System.out.println("Balance: " + DogeChainAPIHelper.getWalletBalance("DPnDSfiJYCKHvpKs3WyLqQaWAF1YT42svy")); //Uses my address at the moment as a place holder
 	}
 	
 	/**
