@@ -10,3 +10,8 @@ Compiling
 3. Compile
 4. ???
 5. Profit
+
+Planned Features
+================
+1. A GUI(Currently in progress)
+2. Managing funds(Only supported for DogeAPI uses though)
