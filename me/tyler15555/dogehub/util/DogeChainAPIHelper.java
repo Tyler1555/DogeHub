@@ -20,6 +20,7 @@ public class DogeChainAPIHelper {
 	 */
 	public static void init() {
 		apiMapDogeChain.put("bal", "addressbalance/");
+		apiMapDogeChain.put("amt", "totalbc");
 	}
 	
 	/**
@@ -30,6 +31,9 @@ public class DogeChainAPIHelper {
 		StringBuffer returningResponse = null;
 		try {
 			URL dogeChainAPIURL = new URL("http://www.dogechain.info/chain/CHAIN/q/" + apiArgument);
+			if(apiArgument == "totalbc") {
+				dogeChainAPIURL = new URL("http://www.dogechain.info/chain/Dogecoin/q/" + apiArgument);
+			}
 			dogeChainAPIConnection = (HttpURLConnection)dogeChainAPIURL.openConnection();
 			dogeChainAPIConnection.setRequestMethod("GET");
 			dogeChainAPIConnection.setUseCaches(false);
@@ -58,6 +62,16 @@ public class DogeChainAPIHelper {
 	
 	public static String getWalletBalance(String walletAddress) {
 		return connectToAPI(apiMapDogeChain.get("bal") + walletAddress);
+	}
+	
+	public static String getMinedAmount() {
+		return connectToAPI(apiMapDogeChain.get("amt"));
+	}
+	
+	public static String getMinedPercent() {
+		double doge = Double.parseDouble(getMinedAmount());
+		double amt = doge / 1000000000;
+		return Double.toString(amt) + "%";
 	}
 	
 }

@@ -30,6 +30,8 @@ public class DogeHub {
 		System.out.println("Market Price(In BTC): " + CryptsyAPIHelper.getMarketPrice());
 		System.out.println("Address: " + DogeAPIHelper.getWalletAddress());
 		System.out.println("Balance: " + DogeChainAPIHelper.getWalletBalance("DPnDSfiJYCKHvpKs3WyLqQaWAF1YT42svy")); //Uses my address at the moment as a place holder
+		System.out.println("Current amount of Doge Mined: " + DogeChainAPIHelper.getMinedAmount());
+		System.out.println("Percent of Doge Mined(Out of 100 billion: " + DogeChainAPIHelper.getMinedPercent());
 	}
 	
 	/**
