@@ -74,13 +74,14 @@ public class DogeAPIHelper {
 		return connectToAPI(apiMapDoge.get("block"), false, null);
 	}
 	
-	//At the moment, these both just use my API key as there is currently no code to fetch a user's API key from a file
+	/* Currently Unused
 	public static String getWalletBalance() {
-		return connectToAPI(apiMapDoge.get("wallet"), true, "ap4vcw1nm0lo01t8b8lc181x7u0");
-	}
+		
+	} */
 	
+	/* Currently Unused
 	public static String getWalletAddress() {
-		return connectToAPI(apiMapDoge.get("address"), true, "ap4vcw1nm0lo01t8b8lc181x7u0").replace('[', ' ').replace(']', ' ');
-	}
+		
+	} */
 	
 }

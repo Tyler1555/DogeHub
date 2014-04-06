@@ -1,9 +1,11 @@
 package me.tyler15555.dogehub;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import me.tyler15555.dogehub.util.CryptsyAPIHelper;
 import me.tyler15555.dogehub.util.DogeAPIHelper;
@@ -17,26 +19,42 @@ public class DogeHub {
 		
 	}
 	
-	//Almost this entire method is a place holder
 	public static void main(String[] args) {
-		setup();
 		DogeAPIHelper.init();
 		CryptsyAPIHelper.init();
 		DogeChainAPIHelper.init();
-		System.out.println("Current Difficulty: " + DogeAPIHelper.getDifficulty());
-		System.out.println("Current Block: " + DogeAPIHelper.getCurrentBlock());
-		System.out.println("Wallet Balance: " + DogeAPIHelper.getWalletBalance());
-		System.out.println("Market Volume: " + CryptsyAPIHelper.getMarketVolume());
-		System.out.println("Market Price(In BTC): " + CryptsyAPIHelper.getMarketPrice());
-		System.out.println("Address: " + DogeAPIHelper.getWalletAddress());
-		System.out.println("Balance: " + DogeChainAPIHelper.getWalletBalance("DPnDSfiJYCKHvpKs3WyLqQaWAF1YT42svy")); //Uses my address at the moment as a place holder
-		System.out.println("Current amount of Doge Mined: " + DogeChainAPIHelper.getMinedAmount());
-		System.out.println("Percent of Doge Mined(Out of 100 billion: " + DogeChainAPIHelper.getMinedPercent());
+		createDogeHubGUI();
 	}
 	
-	/**
-	 * Does first time setup. i.e Creating data directory, account file, etc
-	 */
+	private static void createDogeHubGUI() {
+		URL dogecoinIconURL = null;
+		try {
+			dogecoinIconURL = new URL("http://dogecoin.com/img/dogecoin-300.png");
+		} catch (MalformedURLException e1) {
+			System.out.println("[Dogehub] An error occured getting the Dogecoin icon, don't worry, this isn't a big deal");
+			e1.printStackTrace();
+		}
+		JFrame dogeFrame = new JFrame("Dogehub");
+		JLabel titleLabel = new JLabel("Wow, such data", new ImageIcon(dogecoinIconURL), JLabel.CENTER);
+		JLabel diffLabel = new JLabel("Difficulty: " + DogeAPIHelper.getDifficulty());
+		
+		dogeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		dogeFrame.pack();
+		dogeFrame.setVisible(true);
+		dogeFrame.setIconImage(new ImageIcon(dogecoinIconURL).getImage());
+		
+		titleLabel.setSize(50, 50);
+		titleLabel.setVisible(true);
+		titleLabel.setVerticalAlignment(JLabel.TOP);
+		
+		diffLabel.setVisible(true);
+		
+		dogeFrame.add(titleLabel);
+		dogeFrame.add(diffLabel);
+		dogeFrame.setSize(720, 640);
+	}
+	
+    /* Currently unused as at the moment file reading functionality is broken
 	private static void setup() {
 		File dataDir = new File(System.getenv("USERPROFILE") + "\\My Documents\\DogeHubData");
 		File dataFile = new File(dataDir.getPath() + "\\account.txt");
@@ -52,12 +70,9 @@ public class DogeHub {
 				BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
 				writer.write("#NOTE: All lines starting with a hash sign are skipped!");
 				writer.newLine();
-				writer.write("#Please do not delete all of the contents of this file! If you really messed something up, delete this file and restart Dogehub, a new file will be generated");
-				writer.write("#Toggles data from Cryptsy on/off. Values should be set to true or false. Note, if you disable this data, market price and many other things will not work! In the future, we will not be dependent on Cryptsy for this data");
-				writer.newLine();
 				writer.write("useCryptsyData=true");
 				writer.newLine();
-				writer.write("#Your DogeAPI api key, you will need one if you want to use the DogeAPI wallet functions of this program.");
+				writer.write("#Your DogeAPI api key");
 				writer.newLine();
 				writer.write("apiKey=0");
 				writer.newLine();
@@ -69,9 +84,12 @@ public class DogeHub {
 			} catch (IOException e) {
 				System.out.println("Error! Couldn't create and/or write to data file because: " + e.getMessage());
 				e.printStackTrace();
+			} finally {
+				System.out.println("Created data file!");
 			}
-			System.out.println("Created data file!");
 		}
-	}
-
+		System.out.println("Starting to read data file...");
+		DataHandler.readDataFile(dataFile);
+		System.out.println("USE CRYPTSY DATA:" + DataHandler.getUseCryptsy());
+	} */
 }
